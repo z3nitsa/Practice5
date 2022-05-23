@@ -1,0 +1,42 @@
+#include <iostream>
+using namespace std;
+struct two_numbers{
+    int a = 0;
+    int b = 0;
+};
+template <size_t N>
+two_numbers find_terms(int (&arr)[N], int k){
+    const size_t s = N;
+    int i, j = 0;
+    int c, d = 0;
+    while(j<s){
+        d = arr[j];
+        while(i<j){
+            c = arr[i];
+            i++;
+            if( (c+d) == k){
+                break;
+            }else{
+                continue;
+            }
+        }
+        j++;
+        if( (c+d) == k){
+            break;
+        }else{
+            i = 0;
+            continue;
+        }
+    }
+    two_numbers result;
+    result.a = c;
+    result.b = d;
+    return result;
+}
+int main () {
+    int array[] = {0, 1, 2, 3, 4, 5, 6, 7, 8};
+    int sum = 8;
+    two_numbers t_n;
+    t_n = find_terms(array, sum);
+    cout << "Terms are found: " << t_n.a << " and " << t_n.b << endl;
+}
